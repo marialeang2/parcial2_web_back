@@ -14,7 +14,7 @@ describe('ActividadService', () => {
   let service: ActividadService;
   let repository: Repository<ActividadEntity>;
   let actividadesList: ActividadEntity[];
-  let repositoryEstudiante: Repository<EstudianteEntity>; // Cambia el tipo según tu entidad EstudianteEntity
+  let repositoryEstudiante: Repository<EstudianteEntity>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -24,7 +24,7 @@ describe('ActividadService', () => {
 
     service = module.get<ActividadService>(ActividadService);
     repository = module.get<Repository<ActividadEntity>>(getRepositoryToken(ActividadEntity));
-    repositoryEstudiante = module.get<Repository<EstudianteEntity>>(getRepositoryToken(EstudianteEntity)); // Cambia el tipo según tu entidad EstudianteEntity
+    repositoryEstudiante = module.get<Repository<EstudianteEntity>>(getRepositoryToken(EstudianteEntity)); 
     await seedDatabase();
   });
 
