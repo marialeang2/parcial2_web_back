@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { ActividadService } from './actividad.service';
 import { ActividadEntity } from './actividad.entity';
+import { ActividadController } from './actividad.controller';
 
 @Module({
     imports:[TypeOrmModule.forFeature([ActividadEntity])],
-  providers: [ActividadService]
+  providers: [ActividadService],
+  controllers: [ActividadController]
 })
 export class ActividadModule {}
