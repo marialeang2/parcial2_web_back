@@ -22,7 +22,7 @@ export class ReseñaService {
         throw new BusinessLogicException("Actividad no encontrada", BusinessError.NOT_FOUND);
         }
         
-        if(reseña.actividad.estado !== 2){
+        if(actividad.estado !== 2){
             throw new BusinessLogicException("No está finalizada la actividad", BusinessError.PRECONDITION_FAILED);
         }
 

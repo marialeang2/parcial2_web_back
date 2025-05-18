@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Post, Body, Get, Param, Patch, ParseIntPipe } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Patch, ParseIntPipe, UseInterceptors } from '@nestjs/common';
 import { EstudianteService } from './estudiante.service';
 import { EstudianteDto } from './estudiante.dto';
 import { EstudianteEntity } from './estudiante.entiy';
 import { plainToInstance } from 'class-transformer';
+import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors/business-errors.interceptor';
 
-@Controller('estudiante')
+@Controller('estudiantes')
+@UseInterceptors(BusinessErrorsInterceptor)
 export class EstudianteController {
     constructor(private readonly estudianteService: EstudianteService  ){}
 

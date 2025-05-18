@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Post} from '@nestjs/common';
+import { Body, Controller, Post, UseInterceptors} from '@nestjs/common';
 import { ReseñaService } from './reseña.service';
 import { ReseñaDto } from './reseña.dto';
 import { ReseñaEntity } from './reseña.entity';
 import { plainToInstance } from 'class-transformer';
+import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors/business-errors.interceptor';
 
-@Controller('reseña')
+@Controller('resenias')
+@UseInterceptors(BusinessErrorsInterceptor)
 export class ReseñaController {
     constructor(private readonly reseñaService: ReseñaService){}
 

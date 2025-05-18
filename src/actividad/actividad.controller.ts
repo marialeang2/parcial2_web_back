@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Post, Body, ParseIntPipe, Patch , Param, Get} from '@nestjs/common';
+import { Controller, Post, Body, ParseIntPipe, Patch , Param, Get, UseInterceptors} from '@nestjs/common';
 import { ActividadEntity } from './actividad.entity';
 import { ActividadDto } from './actividad.dto';
 import { plainToInstance } from 'class-transformer';
 import { ActividadService } from './actividad.service';
+import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors/business-errors.interceptor';
 
-@Controller('actividad')
+@Controller('actividades')
+@UseInterceptors(BusinessErrorsInterceptor)
 export class ActividadController {
     constructor(private readonly actividadService: ActividadService){}
 
@@ -15,8 +17,8 @@ export class ActividadController {
         return await this.actividadService.crearActividad(actividad);
     }
 
-    @Patch(':id/estado')
-    async cambiarEstado(@Param('id', ParseIntPipe) id:number, @Body('nuevo estado', ParseIntPipe) nuevoEstado:number ): Promise<ActividadEntity>{
+    @Patch(':id/estado/:estado')
+    async cambiarEstado(@Param('id', ParseIntPipe) id:number, @Param('estado', ParseIntPipe) nuevoEstado:number ): Promise<ActividadEntity>{
         return await this.actividadService.cambiarEstado(id,nuevoEstado);
     }
 

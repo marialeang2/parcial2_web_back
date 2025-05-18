@@ -1,6 +1,19 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, IsString, IsNumber, IsDateString} from "class-validator";
+import { IsNotEmpty, IsString, IsNumber, IsDateString, ValidateNested} from "class-validator";
+import { Type } from "class-transformer";
 
+
+class EstudianteNestedDto {
+  @IsNumber()
+  @IsNotEmpty()
+  id: number;
+}
+
+class ActividadNestedDto {
+  @IsNumber()
+  @IsNotEmpty()
+  id: number;
+}
 export class ReseñaDto {
 
     @IsString()
@@ -15,11 +28,13 @@ export class ReseñaDto {
     @IsNotEmpty()
     readonly fecha: string;
 
-    @IsNumber()
+    @ValidateNested()
+    @Type(() => EstudianteNestedDto)
     @IsNotEmpty()
-    readonly estudianteId: number;
+    readonly estudiante: EstudianteNestedDto;
 
-    @IsNumber()
+    @ValidateNested()
+    @Type(() => ActividadNestedDto)
     @IsNotEmpty()
-    readonly actividadId: number;
+    readonly actividad: ActividadNestedDto;
 }
